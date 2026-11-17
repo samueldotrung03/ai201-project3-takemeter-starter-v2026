@@ -600,3 +600,13 @@ reader's interpretation is correct.
 ---
 
 📖 **How to run this project: [RUNNING.md](RUNNING.md)**
+
+## Capstone
+
+**The Shape**
+
+I'm taking Shape C by adding one local provenance-guard tool to TakeMeter. Before dataset use, it will check that every `labels.csv` row maps one-to-one to a unique, internally consistent public r/ChatGPT source record in `data/labels_sources.json` (row position, post ID, URL, and text length), then emit a machine-readable verdict and input hashes. This is a consistency check against the saved manifest, not live source verification or a claim that the posts are true. The tool and focused tests are scoped to roughly 45–60 minutes, leaving time for the run log and write-up.
+
+**Out of scope**
+
+I'm not changing the classifier, labels, training data, or model settings; I'm not fetching Reddit pages or claiming to verify live provenance; and I'm not building a UI or a new inference endpoint.
