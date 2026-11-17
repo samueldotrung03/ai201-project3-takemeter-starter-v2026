@@ -56,9 +56,10 @@ The second line is the single start command. It validates the saved mapping,
 writes the latest JSON report, and appends one JSON object per line to the
 structured run log. Each record includes a UTC timestamp, input paths and
 hashes when readable, report path/verdict, duration in seconds, row counts,
-and validation-error count. A missing or unreadable input is logged with an
-`error` status and a nonzero exit; a rejected mapping is logged with `fail`
-and a nonzero exit.
+and validation-error count. Text lengths are compared as UTF-16 code units
+after normalizing line endings, so Windows CRLF checkouts and LF sources agree.
+A missing or unreadable input is logged with an `error` status and a nonzero
+exit; a rejected mapping is logged with `fail` and a nonzero exit.
 
 To confirm failure logging without changing project inputs:
 

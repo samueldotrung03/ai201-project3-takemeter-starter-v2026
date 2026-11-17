@@ -14,7 +14,7 @@ import provenance_guard
 
 def fixture_rows():
     return [
-        {"text": "first post\nwith a line break 🌱", "label": "analysis", "note": ""},
+        {"text": "first post\r\nwith a line break 🌱", "label": "analysis", "note": ""},
         {"text": "Second post", "label": "reaction", "note": ""},
     ]
 
@@ -34,6 +34,12 @@ def fixture_sources(rows):
 
 
 class ProvenanceGuardTests(unittest.TestCase):
+    def test_text_length_normalizes_line_endings(self):
+        self.assertEqual(
+            provenance_guard.text_character_count("first\nsecond 🌱"),
+            provenance_guard.text_character_count("first\r\nsecond 🌱"),
+        )
+
     def test_valid_mapping_handles_multiline_text_and_hashes_inputs(self):
         rows = fixture_rows()
         sources = fixture_sources(rows)
