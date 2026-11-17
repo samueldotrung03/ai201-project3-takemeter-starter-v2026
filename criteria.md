@@ -174,6 +174,57 @@ This tests ranking usefulness, not probability calibration.
 
 ---
 
+## Capstone capability: local provenance guard
+
+The extension adds one local preflight tool for the existing TakeMeter dataset:
+it checks whether each row in `labels.csv` has a consistent, unique source
+record in `data/labels_sources.json` before that dataset is used. It checks the
+files against each other; it does not prove that a Reddit page is still live or
+that its contents are true.
+
+### 1. The frozen project dataset passes a complete one-to-one mapping check
+
+For the current 200-row project dataset, the guard must report 200 CSV rows,
+200 source records, and zero missing or extra mappings. Source records must
+match CSV rows by their recorded row number and position.
+
+**How to check:** Run the guard against the repository's `labels.csv` and
+`data/labels_sources.json`. A complete mapping is MET only when every CSV row
+has exactly one source record and every source record corresponds to exactly
+one CSV row.
+
+### 2. Every mapping is internally consistent and unique
+
+Every source record must have a unique Reddit post ID and URL, an `r/ChatGPT`
+public submission URL whose post ID matches the recorded ID, and a recorded
+text length equal to the paired CSV text's character count.
+
+**How to check:** The guard validates each field and reports the row and
+reason for each mismatch. This checks internal consistency only; it does not
+fetch pages or verify their current contents.
+
+### 3. Invalid provenance fails closed with actionable diagnostics
+
+The guard must return a nonzero exit status for a missing source record, an
+extra source record, a duplicate ID or URL, a malformed or mismatched
+community URL, or a text-length mismatch. Its diagnostics must identify the
+affected row and failure without reporting a passing verdict.
+
+**How to check:** Run focused tests using temporary copies of a valid small
+dataset and manifest, introducing each listed defect independently. All
+invalid fixtures must fail; the valid fixture must pass.
+
+### 4. A passing report is reproducible and identifies its inputs
+
+On a valid pair, the guard must return success and produce a JSON report with
+the row count, zero failures, and SHA-256 hashes for both input files. Repeating
+the check on unchanged files must produce the same counts, verdict, and hashes.
+
+**How to check:** Run the guard twice on identical files and compare the
+stable report fields. Timestamps, if included, are not part of this comparison.
+
+---
+
 ## AI checkability review before training
 
 Review question: **Could someone check each criterion without asking its
