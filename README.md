@@ -610,3 +610,27 @@ I'm taking Shape C by adding one local provenance-guard tool to TakeMeter. Befor
 **Out of scope**
 
 I'm not changing the classifier, labels, training data, or model settings; I'm not fetching Reddit pages or claiming to verify live provenance; and I'm not building a UI or a new inference endpoint.
+
+**The Improvement**
+
+The local `provenance_guard.py` tool checks that rows in `labels.csv` have a one-to-one mapping to `data/labels_sources.json`, with unique Reddit IDs and URLs, matching row positions, matching post IDs in public r/ChatGPT URLs, and matching text lengths. Lengths use UTF-16 code units to match the convention already used in the source manifest. It writes a JSON report with a pass/fail verdict, row counts, diagnostics, and SHA-256 hashes for both inputs. Run it from the project directory with:
+
+```powershell
+.\.venv\Scripts\python.exe provenance_guard.py
+```
+
+Use `--data`, `--sources`, or `--out` to select other input or report paths.
+
+**How I Used AI**
+
+Copilot assisted with implementing the guard and its focused tests. I checked the implementation against the existing source manifest and project data, including resolving a text-length mismatch caused by Unicode counting conventions. The tool uses only the Python standard library and does not fetch Reddit pages.
+
+**Run Log and Verdicts**
+
+On November 16, 2026, the guard reported **PASS** for 200 CSV rows and 200 source records, with zero missing mappings, extra mappings, or validation errors. Two unchanged-input runs produced identical reports. The recorded input hashes and full report are in [provenance_guard_results.json](provenance_guard_results.json).
+
+All four Capstone criteria in [criteria.md](criteria.md) passed their checks: the current dataset mapped completely; each mapping was internally consistent; focused valid and deliberately invalid fixtures produced the expected pass/fail results; and repeated reports were identical. `python -m unittest test_provenance_guard test_collect_reddit.py` passed all nine tests. The original project's `test.py` passed all ten checks, `baseline.py --help` remained available, and a synthetic smoke input through the saved TakeMeter model produced four label logits. No model evaluation or training was run.
+
+**What's Still Broken**
+
+The guard validates only the relationship between the local CSV and its saved manifest. A fabricated but internally consistent manifest can still pass; the tool does not verify that a post exists, that its current public page matches the saved text, or that its recorded source is true.

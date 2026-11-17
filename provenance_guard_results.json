@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "csv_rows": 200,
+  "source_records": 200,
+  "missing_mappings": 0,
+  "extra_mappings": 0,
+  "errors": [],
+  "input_sha256": {
+    "data": "9f612b5d8bd0e9901a53ab87c717d49cfc5118d97503feb54fac2688903c1a8c",
+    "sources": "523dbafd1f0055481525ec47febfd0869324d5e785fee2ece71dad0245daf962"
+  }
+}
