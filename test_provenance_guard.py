@@ -127,6 +127,7 @@ class ProvenanceGuardTests(unittest.TestCase):
             data_path = Path(directory) / "labels.csv"
             sources_path = Path(directory) / "sources.json"
             report_path = Path(directory) / "report.json"
+            log_path = Path(directory) / "runs.jsonl"
             with data_path.open("w", encoding="utf-8", newline="") as handle:
                 writer = csv.DictWriter(handle, fieldnames=("text", "label", "note"))
                 writer.writeheader()
@@ -143,14 +144,81 @@ class ProvenanceGuardTests(unittest.TestCase):
                     str(sources_path),
                     "--out",
                     str(report_path),
+                    "--log",
+                    str(log_path),
                 ],
             ), redirect_stdout(output):
                 exit_code = provenance_guard.main()
 
             report = json.loads(report_path.read_text(encoding="utf-8"))
+            log_record = json.loads(log_path.read_text(encoding="utf-8").strip())
             self.assertEqual(exit_code, 1)
             self.assertEqual(report["status"], "FAIL")
             self.assertIn("FAIL:", output.getvalue())
+            self.assertEqual(log_record["status"], "fail")
+            self.assertEqual(log_record["output"]["status"], "FAIL")
+            self.assertGreaterEqual(log_record["duration_seconds"], 0)
+            self.assertTrue(log_record["timestamp_utc"].endswith("Z"))
+
+    def test_cli_logs_success_run(self):
+        rows = fixture_rows()
+        sources = fixture_sources(rows)
+        with tempfile.TemporaryDirectory() as directory:
+            data_path = Path(directory) / "labels.csv"
+            sources_path = Path(directory) / "sources.json"
+            log_path = Path(directory) / "runs.jsonl"
+            with data_path.open("w", encoding="utf-8", newline="") as handle:
+                writer = csv.DictWriter(handle, fieldnames=("text", "label", "note"))
+                writer.writeheader()
+                writer.writerows(rows)
+            sources_path.write_text(json.dumps({"posts": sources}), encoding="utf-8")
+            with patch(
+                "sys.argv",
+                [
+                    "provenance_guard.py",
+                    "--data",
+                    str(data_path),
+                    "--sources",
+                    str(sources_path),
+                    "--out",
+                    str(Path(directory) / "report.json"),
+                    "--log",
+                    str(log_path),
+                ],
+            ), redirect_stdout(StringIO()):
+                exit_code = provenance_guard.main()
+
+            log_record = json.loads(log_path.read_text(encoding="utf-8").strip())
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(log_record["status"], "pass")
+            self.assertEqual(log_record["details"]["csv_rows"], 2)
+            self.assertEqual(log_record["details"]["validation_errors"], 0)
+            self.assertEqual(set(log_record["input"]["sha256"]), {"data", "sources"})
+
+    def test_cli_logs_missing_input_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            log_path = Path(directory) / "runs.jsonl"
+            with patch(
+                "sys.argv",
+                [
+                    "provenance_guard.py",
+                    "--data",
+                    str(Path(directory) / "missing.csv"),
+                    "--sources",
+                    str(Path(directory) / "missing.json"),
+                    "--out",
+                    str(Path(directory) / "report.json"),
+                    "--log",
+                    str(log_path),
+                ],
+            ), redirect_stdout(StringIO()), patch("sys.stderr", new_callable=StringIO):
+                exit_code = provenance_guard.main()
+
+            log_record = json.loads(log_path.read_text(encoding="utf-8").strip())
+            self.assertEqual(exit_code, 2)
+            self.assertEqual(log_record["status"], "error")
+            self.assertIn("FileNotFoundError", log_record["error"])
+            self.assertEqual(log_record["output"]["status"], "not_written")
 
 
 if __name__ == "__main__":

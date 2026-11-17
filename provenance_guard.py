@@ -3,11 +3,13 @@
 
 import argparse
 import csv
+from datetime import datetime, timezone
 import hashlib
 import io
 import json
 import re
 import sys
+import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -155,32 +157,71 @@ def main():
     parser.add_argument(
         "--out", default="provenance_guard_results.json", help="JSON report path"
     )
+    parser.add_argument(
+        "--log", default="provenance_guard_runs.jsonl", help="append-only JSONL run log"
+    )
     args = parser.parse_args()
+
+    started_at = time.perf_counter()
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace(
+        "+00:00", "Z"
+    )
+    run = {
+        "timestamp_utc": timestamp,
+        "event": "provenance_guard.run",
+        "input": {"data": args.data, "sources": args.sources},
+        "output": {"report": args.out, "status": "not_written"},
+    }
 
     try:
         rows, sources, data_bytes, sources_bytes = read_inputs(args.data, args.sources)
     except (OSError, UnicodeError, csv.Error, json.JSONDecodeError, ValueError) as exc:
+        run["status"] = "error"
+        run["error"] = f"{type(exc).__name__}: {exc}"
+        exit_code = 2
         print(f"Cannot check provenance: {exc}", file=sys.stderr)
-        return 2
+    else:
+        run["input"]["sha256"] = {
+            "data": hashlib.sha256(data_bytes).hexdigest(),
+            "sources": hashlib.sha256(sources_bytes).hexdigest(),
+        }
+        report = validate(rows, sources)
+        report["input_sha256"] = run["input"]["sha256"]
+        run["details"] = {
+            "csv_rows": report["csv_rows"],
+            "source_records": report["source_records"],
+            "validation_errors": len(report["errors"]),
+        }
 
-    report = validate(rows, sources)
-    report["input_sha256"] = {
-        "data": hashlib.sha256(data_bytes).hexdigest(),
-        "sources": hashlib.sha256(sources_bytes).hexdigest(),
-    }
+        try:
+            Path(args.out).write_text(
+                json.dumps(report, indent=2) + "\n", encoding="utf-8"
+            )
+        except OSError as exc:
+            run["status"] = "error"
+            run["error"] = f"{type(exc).__name__}: {exc}"
+            exit_code = 2
+            print(f"Cannot write report to {args.out}: {exc}", file=sys.stderr)
+        else:
+            run["status"] = "pass" if report["status"] == "PASS" else "fail"
+            run["output"]["status"] = report["status"]
+            exit_code = 0 if report["status"] == "PASS" else 1
 
+    run["duration_seconds"] = round(time.perf_counter() - started_at, 6)
     try:
-        Path(args.out).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+        with Path(args.log).open("a", encoding="utf-8") as log_file:
+            log_file.write(json.dumps(run, ensure_ascii=False, sort_keys=True) + "\n")
     except OSError as exc:
-        print(f"Cannot write report to {args.out}: {exc}", file=sys.stderr)
+        print(f"Cannot append run log to {args.log}: {exc}", file=sys.stderr)
         return 2
-
-    print(
-        f"{report['status']}: {report['csv_rows']} CSV rows, "
-        f"{report['source_records']} source records, {len(report['errors'])} errors"
-    )
-    print(f"Report: {args.out}")
-    return 0 if report["status"] == "PASS" else 1
+    if run["status"] in ("pass", "fail"):
+        print(
+            f"{run['output']['status']}: {run['details']['csv_rows']} CSV rows, "
+            f"{run['details']['source_records']} source records, "
+            f"{run['details']['validation_errors']} errors"
+        )
+        print(f"Report: {args.out}")
+    return exit_code
 
 
 if __name__ == "__main__":
