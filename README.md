@@ -682,21 +682,29 @@ failure took 0.009568 seconds. Neither failed run is included in the success
 average. These are warm local runs over this 200-row dataset, not a general
 performance guarantee.
 
-After committing the five evaluation criteria, I ran three new ten-run
-samples in independent clean clones. The means were **0.006822 s**,
+Before the improvement, after committing the original five evaluation
+criteria, I ran three ten-run samples in independent clean clones. The means
+were **0.006822 s**,
 **0.007103 s**, and **0.007530 s**; the arithmetic mean across all 30
-successful calls was **0.007152 s**. Each sample is below the 0.100-second
-criterion. The per-round records are in
+successful calls was **0.007152 s**. Each sample is below the original
+0.100-second criterion. The per-round records are in
 [capstone_evaluation_runs.json](capstone_evaluation_runs.json).
 
 **Run Log and Verdicts**
 
-The five criteria were committed as `084fc6d` before these evaluations. Each
-run below used a separate clean clone of that commit, Python 3.13.15, and the
-same Windows machine. The evidence file
-[capstone_evaluation_runs.json](capstone_evaluation_runs.json) saves the
-commands, return codes, stdout/stderr, JSON reports, JSONL records, and
-durations for all three runs.
+The original criteria were committed as `084fc6d` before the baseline trials.
+Those three trials used separate clean clones of that commit and Python
+3.13.15. After seeing all five criteria MET, I committed the stricter
+criterion 5 target as `3478676`, then the one code improvement as `edc0f0f`.
+The follow-up trials used three new clean clones of `edc0f0f`, also with
+Python 3.13.15. Full raw evidence is preserved in
+[capstone_evaluation_runs.json](capstone_evaluation_runs.json) and
+[capstone_followup_evaluation_runs.json](capstone_followup_evaluation_runs.json).
+
+The tables use the same columns so each follow-up trial can be compared with
+the corresponding baseline trial.
+
+**Before improvement**
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
@@ -706,12 +714,46 @@ durations for all three runs.
 | 4. Report reproducibility | Two identical-input reports byte-identical | Yes; `4fcc4c58…` | Yes; `4fcc4c58…` | Yes; `4fcc4c58…` | MET |
 | 5. Ten-run latency | Mean <= 0.100 s per ten successful invocations | 0.006822 s | 0.007103 s | 0.007530 s | MET |
 
-Real Run 1 output for each criterion follows. The guard output/report is
-produced by `provenance_guard.py::main()`; validation diagnostics are created
-by `provenance_guard.py::validate()`. The report comparisons and three-round
-summary are recorded in `capstone_evaluation_runs.json`.
+**After improvement**
 
-**Criterion 1 — clean checkout**
+| Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. Clean-checkout dataset validation | Exit 0; PASS, 200 rows/sources, 0 mapping errors | PASS; 200/200; 0 errors | PASS; 200/200; 0 errors | PASS; 200/200; 0 errors | MET |
+| 2. Mapping defect detection | 1 valid + 8/8 invalid fixtures correctly handled | 9/9 | 9/9 | 9/9 | MET |
+| 3. Structured success/failure logging | 3/3 records; `pass/0`, `fail/1`, `error/2` | 3/3; 0/1/2 | 3/3; 0/1/2 | 3/3; 0/1/2 | MET |
+| 4. Report reproducibility | Two identical-input reports byte-identical | Yes; `4fcc4c58…` | Yes; `4fcc4c58…` | Yes; `4fcc4c58…` | MET |
+| 5. Ten-run latency | Mean <= 0.020 s per ten successful invocations | 0.006799 s | 0.006802 s | 0.007003 s | MET |
+
+**Diagnosis and One Improvement**
+
+No original criterion was missed, so there is no failing stage to diagnose.
+The targets were not all equally demanding: criterion 5's 0.100-second
+ceiling allowed roughly fourteen times the original overall measured mean of
+0.007152 seconds. I tightened that criterion to 0.020 seconds before the
+follow-up evaluation; that is five times stricter and still leaves about
+2.7 times the slowest original trial mean as headroom.
+
+The improvement targets the per-row text-length stage in
+`provenance_guard.py::validate()`. In the Windows clean clone, all 200 text
+fields contain CRLF. Previously, `text_character_count()` created a
+normalized string with two `replace()` passes before encoding it as UTF-16.
+The new implementation counts the original UTF-16 units and subtracts one
+unit per CRLF pair, which is exactly the length after normalization without
+allocating normalized copies. A focused regression test covers mixed and
+repeated line endings and supplementary Unicode. The focused guard and
+collector suite passed all 13 tests.
+
+All five criteria remained MET in all three post-improvement trials. The
+mean across 30 successful calls moved from **0.007152 s** to **0.006868 s**,
+a **3.97% measured reduction** (about 0.000284 seconds per call). That is a
+modest improvement on this warm local workload, not a general performance
+guarantee; the four correctness/logging criteria did not regress.
+
+The before-improvement Run 1 output for each criterion follows. The guard
+output/report is produced by `provenance_guard.py::main()`; validation
+diagnostics are created by `provenance_guard.py::validate()`.
+
+**Criterion 1 — clean checkout, before**
 
 Producer: `provenance_guard.py::main()`; stdout and report excerpt from Run 1.
 
@@ -735,7 +777,7 @@ Report: provenance_guard_results.json
 }
 ```
 
-**Criterion 2 — mapping defect**
+**Criterion 2 — mapping defect, before**
 
 Producer: `provenance_guard.py::main()` and `validate()`; Run 1 duplicate-URL
 fixture response and its `report.json`.
@@ -757,7 +799,7 @@ FAIL: 2 CSV rows, 2 source records, 2 errors
 ]
 ```
 
-**Criterion 3 — structured failure records**
+**Criterion 3 — structured failure records, before**
 
 Producer: `provenance_guard.py::main()`; these are the actual three lines
 appended to Run 1's `runs.jsonl` for success, rejected mapping, and missing
@@ -769,7 +811,7 @@ source file.
 {"duration_seconds": 0.000284, "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-1\\\\evaluation-run-1\\\\criterion-3-logging\\\\missing.json'", "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv", "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing-report.json", "status": "not_written"}, "status": "error", "timestamp_utc": "2026-11-17T04:05:01.178Z"}
 ```
 
-**Criterion 4 — repeated report**
+**Criterion 4 — repeated report, before**
 
 Producer: `provenance_guard.py::main()` wrote both reports; Run 1's
 byte-comparison result is from `capstone_evaluation_runs.json`.
@@ -782,7 +824,7 @@ first_report_sha256: 4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e23647
 second_report_sha256: 4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c
 ```
 
-**Criterion 5 — ten-run latency**
+**Criterion 5 — ten-run latency, before**
 
 Producer: `provenance_guard.py::main()` wrote these Run 1 `runs.jsonl` records;
 the mean in `capstone_evaluation_runs.json` is calculated from their
@@ -799,4 +841,99 @@ the mean in `capstone_evaluation_runs.json` is calculated from their
 {"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006831, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.152Z"}
 {"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006928, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.254Z"}
 {"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007279, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.350Z"}
+```
+**After-improvement Run 1 output for each criterion**
+
+All excerpts below came from Run 1 in the three new clean clones. The full
+commands, return codes, reports, fixture results, and JSONL records are in
+[capstone_followup_evaluation_runs.json](capstone_followup_evaluation_runs.json).
+
+**Criterion 1 — clean checkout, after**
+
+Producer: `provenance_guard.py::main()`; stdout and report excerpt.
+
+```text
+PASS: 200 CSV rows, 200 source records, 0 errors
+Report: provenance_guard_results.json
+```
+
+```json
+{
+  "status": "PASS",
+  "csv_rows": 200,
+  "source_records": 200,
+  "missing_mappings": 0,
+  "extra_mappings": 0,
+  "errors": [],
+  "input_sha256": {
+    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+  }
+}
+```
+
+**Criterion 2 — mapping defect, after**
+
+Producer: `provenance_guard.py::main()` and `validate()`; duplicate-URL
+fixture response and `.followup-run-1\criterion-2-fixtures\duplicate_url\report.json`.
+
+```text
+FAIL: 2 CSV rows, 2 source records, 2 errors
+Report: .followup-run-1\criterion-2-fixtures\duplicate_url\report.json
+```
+
+```json
+[
+  {
+    "row": 2,
+    "reason": "duplicate source URL (first seen at row 1)"
+  },
+  {
+    "row": 2,
+    "reason": "source URL post ID 'abc1' does not match source ID 't3_def2'"
+  }
+]
+```
+
+**Criterion 3 — structured failure records, after**
+
+Producer: `provenance_guard.py::main()`; these are the actual lines appended
+for success, invalid mapping, and missing source file.
+
+```jsonl
+{"details": {"csv_rows": 2, "source_records": 2, "validation_errors": 0}, "duration_seconds": 0.003558, "event": "provenance_guard.run", "input": {"data": ".followup-run-1\\criterion-3-logging\\valid\\fixture.csv", "sha256": {"data": "ace8b04edb3e6e1c9cf498bd96c2f8b3c8de5ccfc9b42b578b8d29402b44bb65", "sources": "0ace2a4e997fb231601f4b05651c25d0a835132b6b33f84e4b945af563802058"}, "sources": ".followup-run-1\\criterion-3-logging\\valid\\sources.json"}, "output": {"report": ".followup-run-1\\criterion-3-logging\\valid-report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:37.801Z"}
+{"details": {"csv_rows": 2, "source_records": 2, "validation_errors": 1}, "duration_seconds": 0.003803, "event": "provenance_guard.run", "input": {"data": ".followup-run-1\\criterion-3-logging\\invalid\\fixture.csv", "sha256": {"data": "ace8b04edb3e6e1c9cf498bd96c2f8b3c8de5ccfc9b42b578b8d29402b44bb65", "sources": "527e9e8f72ea96379b1fa77f068188421be38b2cbd5ac8a5e8fbe463cf0aeec3"}, "sources": ".followup-run-1\\criterion-3-logging\\invalid\\sources.json"}, "output": {"report": ".followup-run-1\\criterion-3-logging\\invalid_mapping-report.json", "status": "FAIL"}, "status": "fail", "timestamp_utc": "2026-11-17T04:23:37.903Z"}
+{"duration_seconds": 0.000368, "error": "FileNotFoundError: [Errno 2] No such file or directory: '.followup-run-1\\\\criterion-3-logging\\\\missing.json'", "event": "provenance_guard.run", "input": {"data": ".followup-run-1\\criterion-3-logging\\valid\\fixture.csv", "sources": ".followup-run-1\\criterion-3-logging\\missing.json"}, "output": {"report": ".followup-run-1\\criterion-3-logging\\missing_source-report.json", "status": "not_written"}, "status": "error", "timestamp_utc": "2026-11-17T04:23:38.007Z"}
+```
+
+**Criterion 4 — repeated report, after**
+
+Producer: `provenance_guard.py::main()` wrote both reports; Run 1's
+byte-comparison result is recorded in
+[capstone_followup_evaluation_runs.json](capstone_followup_evaluation_runs.json).
+
+```text
+PASS: 200 CSV rows, 200 source records, 0 errors
+PASS: 200 CSV rows, 200 source records, 0 errors
+byte_identical: true
+first_report_sha256: 4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c
+second_report_sha256: 4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c
+```
+
+**Criterion 5 — ten-run latency, after**
+
+Producer: `provenance_guard.py::main()` wrote these Run 1 `runs.jsonl` lines;
+the per-trial mean is `statistics.fmean()` over their `duration_seconds`.
+
+```jsonl
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006653, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.307Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006907, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.398Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006604, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.493Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006582, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.588Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007004, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.679Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006723, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.775Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006771, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.871Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007178, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:38.965Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006863, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:39.065Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006704, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:39.160Z"}
 ```
