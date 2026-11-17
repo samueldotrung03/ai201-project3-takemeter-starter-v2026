@@ -613,7 +613,7 @@ I'm not changing the classifier, labels, training data, or model settings; I'm n
 
 **The Improvement**
 
-The local `provenance_guard.py` tool checks that rows in `labels.csv` have a one-to-one mapping to `data/labels_sources.json`, with unique Reddit IDs and URLs, matching row positions, matching post IDs in public r/ChatGPT URLs, and matching text lengths. Lengths use UTF-16 code units to match the convention already used in the source manifest. It writes a JSON report with a pass/fail verdict, row counts, diagnostics, and SHA-256 hashes for both inputs. Run it from the project directory with:
+The local `provenance_guard.py` tool checks that rows in `labels.csv` have a one-to-one mapping to `data/labels_sources.json`, with unique Reddit IDs and URLs, matching row positions, matching post IDs in public r/ChatGPT URLs, and matching text lengths. Lengths use UTF-16 code units with normalized line endings to match the source manifest across operating systems. It writes a JSON report with a pass/fail verdict, row counts, diagnostics, and SHA-256 hashes for both inputs. Run it from the project directory with:
 
 ```powershell
 .\.venv\Scripts\python.exe provenance_guard.py
@@ -634,3 +634,50 @@ All four Capstone criteria in [criteria.md](criteria.md) passed their checks: th
 **What's Still Broken**
 
 The guard validates only the relationship between the local CSV and its saved manifest. A fabricated but internally consistent manifest can still pass; the tool does not verify that a post exists, that its current public page matches the saved text, or that its recorded source is true.
+
+**Instrumentation**
+
+I cloned the committed repository to a new folder, created a Python 3.13
+virtual environment, and followed the start commands in [RUNNING.md](RUNNING.md).
+The first clean-clone run exposed a real Windows issue: Git's `core.autocrlf`
+changed line breaks inside CSV text, so all 200 length comparisons failed. I
+normalized line endings before measuring text and added a regression test. A
+fresh clone at commit `18c4b55` then passed using the documented command.
+
+The committed [provenance_guard_runs.jsonl](provenance_guard_runs.jsonl)
+contains the initial failed clean-clone check, ten successful runs from the
+fixed clean clone, and a failed run using a missing source manifest. Each
+record includes a UTC timestamp, input paths and hashes when readable, output
+report and verdict, duration, and validation counts or the error. The first
+failure returned exit code 1 with 200 line-ending mismatches; the missing-file
+failure returned exit code 2 and left an `error` record instead of disappearing.
+
+The ten successful JSONL entries and both failed entries are pasted below:
+
+```jsonl
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 200}, "duration_seconds": 0.009568, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "FAIL"}, "status": "fail", "timestamp_utc": "2026-11-17T03:38:31.014Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.02385, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:30.148Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007842, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.242Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007398, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.344Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007223, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.447Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.00775, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.548Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007327, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.652Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007269, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.753Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006846, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.855Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007062, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:38.953Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007083, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T03:39:39.052Z"}
+{"duration_seconds": 0.000464, "error": "FileNotFoundError: [Errno 2] No such file or directory: 'missing-sources.json'", "event": "provenance_guard.run", "input": {"data": "labels.csv", "sources": ".\\missing-sources.json"}, "output": {"report": "provenance_guard_results.json", "status": "not_written"}, "status": "error", "timestamp_utc": "2026-11-17T03:39:43.741Z"}
+```
+
+**What It Costs**
+
+The real cost for this local guard is compute time, not API spend or tokens.
+Across the ten successful runs above, the mean recorded duration was **0.008965
+seconds** (about 9 ms). I measured it with `time.perf_counter()` inside the
+guard, after argument parsing and through reading/hashing the two inputs,
+validating all rows, and writing the JSON report. It excludes Python startup,
+virtual-environment setup, and appending the JSONL record. The failure run took
+0.000464 seconds for the missing-manifest case; the earlier line-ending
+failure took 0.009568 seconds. Neither failed run is included in the success
+average. These are warm local runs over this 200-row dataset, not a general
+performance guarantee.
