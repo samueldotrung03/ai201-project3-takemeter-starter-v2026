@@ -8,6 +8,66 @@ nothing hosted.
 
 ---
 
+## Capstone Path B — local provenance guard
+
+The Capstone entry point is the local provenance guard, not a model-training
+or inference run. Run it from the repository root so its default input paths
+resolve to the committed project dataset and source manifest.
+
+### Environment
+
+- Use Python **3.11–3.13**. The clean-checkout commands below create a Python
+  3.13 virtual environment.
+- The guard uses only Python's standard library. No `pip install` step,
+  API key, network connection, or model download is needed.
+- Inputs: `labels.csv` and `data/labels_sources.json`.
+- Outputs: `provenance_guard_results.json` (latest report) and
+  `provenance_guard_runs.jsonl` (append-only structured run log, including
+  failed checks).
+- The guard needs **no model files**. The separate TakeMeter classifier's
+  `takemeter_out/project/model/` is generated locally and is not included in
+  a clean clone. On the development machine, that directory totals
+  268,789,679 bytes, including a 267,838,720-byte `model.safetensors`; it is
+  not required to run this Capstone command. The zero-shot baseline separately
+  downloads about 1.6 GB when first used.
+
+The full training/notebook stack is only needed for the original classifier;
+its package constraints remain in `requirements.txt`:
+
+```text
+pandas>=2.0,<3.0
+transformers>=4.44,<5.0
+datasets>=2.20,<4.0
+accelerate>=0.30,<2.0
+torch>=2.2,<3.0
+scikit-learn>=1.3,<2.0
+```
+
+### Clean checkout and start command (Windows PowerShell)
+
+From the cloned repository root:
+
+```powershell
+py -3.13 -m venv .venv
+.\.venv\Scripts\python.exe .\provenance_guard.py
+```
+
+The second line is the single start command. It validates the saved mapping,
+writes the latest JSON report, and appends one JSON object per line to the
+structured run log. Each record includes a UTC timestamp, input paths and
+hashes when readable, report path/verdict, duration in seconds, row counts,
+and validation-error count. A missing or unreadable input is logged with an
+`error` status and a nonzero exit; a rejected mapping is logged with `fail`
+and a nonzero exit.
+
+To confirm failure logging without changing project inputs:
+
+```powershell
+.\.venv\Scripts\python.exe .\provenance_guard.py --sources .\missing-sources.json
+```
+
+---
+
 ## Before your first class
 
 One setup, one virtual environment, everything in this repo. The
