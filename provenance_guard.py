@@ -37,6 +37,11 @@ def read_inputs(data_path, sources_path):
     return rows, manifest["posts"], data_bytes, sources_bytes
 
 
+def text_character_count(text):
+    """Match the UTF-16 code-unit count used when the source manifest was made."""
+    return len(text.encode("utf-16-le")) // 2
+
+
 def validate(rows, sources):
     """Return row-specific mapping diagnostics for a dataset and its manifest."""
     errors = []
@@ -106,12 +111,13 @@ def validate(rows, sources):
                 })
 
         recorded_length = source.get("text_characters")
-        if type(recorded_length) is not int or recorded_length != len(rows[index]["text"]):
+        actual_length = text_character_count(rows[index]["text"])
+        if type(recorded_length) is not int or recorded_length != actual_length:
             errors.append({
                 "row": expected_row,
                 "reason": (
                     f"text_characters is {recorded_length!r}; "
-                    f"CSV text has {len(rows[index]['text'])} characters"
+                    f"CSV text has {actual_length} UTF-16 code units"
                 ),
             })
 
