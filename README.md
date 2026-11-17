@@ -625,11 +625,11 @@ Use `--data`, `--sources`, or `--out` to select other input or report paths.
 
 Copilot assisted with implementing the guard and its focused tests. I checked the implementation against the existing source manifest and project data, including resolving a text-length mismatch caused by Unicode counting conventions. The tool uses only the Python standard library and does not fetch Reddit pages.
 
-**Run Log and Verdicts**
+**Milestone 1 Build Smoke Check**
 
-On November 16, 2026, the guard reported **PASS** for 200 CSV rows and 200 source records, with zero missing mappings, extra mappings, or validation errors. Two unchanged-input runs produced identical reports. The recorded input hashes and full report are in [provenance_guard_results.json](provenance_guard_results.json).
+On November 16, 2026, the initial four build criteria for the guard reported **PASS** for 200 CSV rows and 200 source records, with zero missing mappings, extra mappings, or validation errors. Two unchanged-input runs produced identical reports. The recorded input hashes and full report are in [provenance_guard_results.json](provenance_guard_results.json).
 
-All four Capstone criteria in [criteria.md](criteria.md) passed their checks: the current dataset mapped completely; each mapping was internally consistent; focused valid and deliberately invalid fixtures produced the expected pass/fail results; and repeated reports were identical. `python -m unittest test_provenance_guard test_collect_reddit.py` passed all nine tests. The original project's `test.py` passed all ten checks, `baseline.py --help` remained available, and a synthetic smoke input through the saved TakeMeter model produced four label logits. No model evaluation or training was run.
+The original four build criteria in [criteria.md](criteria.md) passed their checks: the current dataset mapped completely; each mapping was internally consistent; focused valid and deliberately invalid fixtures produced the expected pass/fail results; and repeated reports were identical. `python -m unittest test_provenance_guard test_collect_reddit.py` passed all nine tests at that stage. The original project's `test.py` passed all ten checks, `baseline.py --help` remained available, and a synthetic smoke input through the saved TakeMeter model produced four label logits. No model evaluation or training was run.
 
 **What's Still Broken**
 
@@ -681,3 +681,122 @@ virtual-environment setup, and appending the JSONL record. The failure run took
 failure took 0.009568 seconds. Neither failed run is included in the success
 average. These are warm local runs over this 200-row dataset, not a general
 performance guarantee.
+
+After committing the five evaluation criteria, I ran three new ten-run
+samples in independent clean clones. The means were **0.006822 s**,
+**0.007103 s**, and **0.007530 s**; the arithmetic mean across all 30
+successful calls was **0.007152 s**. Each sample is below the 0.100-second
+criterion. The per-round records are in
+[capstone_evaluation_runs.json](capstone_evaluation_runs.json).
+
+**Run Log and Verdicts**
+
+The five criteria were committed as `084fc6d` before these evaluations. Each
+run below used a separate clean clone of that commit, Python 3.13.15, and the
+same Windows machine. The evidence file
+[capstone_evaluation_runs.json](capstone_evaluation_runs.json) saves the
+commands, return codes, stdout/stderr, JSON reports, JSONL records, and
+durations for all three runs.
+
+| Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. Clean-checkout dataset validation | Exit 0; PASS, 200 rows/sources, 0 mapping errors | PASS; 200/200; 0 errors | PASS; 200/200; 0 errors | PASS; 200/200; 0 errors | MET |
+| 2. Mapping defect detection | 1 valid + 8/8 invalid fixtures correctly handled | 9/9 | 9/9 | 9/9 | MET |
+| 3. Structured success/failure logging | 3/3 records; `pass/0`, `fail/1`, `error/2` | 3/3; 0/1/2 | 3/3; 0/1/2 | 3/3; 0/1/2 | MET |
+| 4. Report reproducibility | Two identical-input reports byte-identical | Yes; `4fcc4c58…` | Yes; `4fcc4c58…` | Yes; `4fcc4c58…` | MET |
+| 5. Ten-run latency | Mean <= 0.100 s per ten successful invocations | 0.006822 s | 0.007103 s | 0.007530 s | MET |
+
+Real Run 1 output for each criterion follows. The guard output/report is
+produced by `provenance_guard.py::main()`; validation diagnostics are created
+by `provenance_guard.py::validate()`. The report comparisons and three-round
+summary are recorded in `capstone_evaluation_runs.json`.
+
+**Criterion 1 — clean checkout**
+
+Producer: `provenance_guard.py::main()`; stdout and report excerpt from Run 1.
+
+```text
+PASS: 200 CSV rows, 200 source records, 0 errors
+Report: provenance_guard_results.json
+```
+
+```json
+{
+  "status": "PASS",
+  "csv_rows": 200,
+  "source_records": 200,
+  "missing_mappings": 0,
+  "extra_mappings": 0,
+  "errors": [],
+  "input_sha256": {
+    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+  }
+}
+```
+
+**Criterion 2 — mapping defect**
+
+Producer: `provenance_guard.py::main()` and `validate()`; Run 1 duplicate-URL
+fixture response and its `report.json`.
+
+```text
+FAIL: 2 CSV rows, 2 source records, 2 errors
+```
+
+```json
+[
+  {
+    "row": 2,
+    "reason": "duplicate source URL (first seen at row 1)"
+  },
+  {
+    "row": 2,
+    "reason": "source URL post ID 'abc1' does not match source ID 't3_def2'"
+  }
+]
+```
+
+**Criterion 3 — structured failure records**
+
+Producer: `provenance_guard.py::main()`; these are the actual three lines
+appended to Run 1's `runs.jsonl` for success, rejected mapping, and missing
+source file.
+
+```jsonl
+{"details": {"csv_rows": 2, "source_records": 2, "validation_errors": 0}, "duration_seconds": 0.003646, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv", "sha256": {"data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b", "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\valid-report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:00.983Z"}
+{"details": {"csv_rows": 2, "source_records": 2, "validation_errors": 1}, "duration_seconds": 0.003499, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.csv", "sha256": {"data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b", "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad-report.json", "status": "FAIL"}, "status": "fail", "timestamp_utc": "2026-11-17T04:05:01.081Z"}
+{"duration_seconds": 0.000284, "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-1\\\\evaluation-run-1\\\\criterion-3-logging\\\\missing.json'", "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv", "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing-report.json", "status": "not_written"}, "status": "error", "timestamp_utc": "2026-11-17T04:05:01.178Z"}
+```
+
+**Criterion 4 — repeated report**
+
+Producer: `provenance_guard.py::main()` wrote both reports; Run 1's
+byte-comparison result is from `capstone_evaluation_runs.json`.
+
+```text
+PASS: 200 CSV rows, 200 source records, 0 errors
+PASS: 200 CSV rows, 200 source records, 0 errors
+byte_identical: true
+first_report_sha256: 4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c
+second_report_sha256: 4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c
+```
+
+**Criterion 5 — ten-run latency**
+
+Producer: `provenance_guard.py::main()` wrote these Run 1 `runs.jsonl` records;
+the mean in `capstone_evaluation_runs.json` is calculated from their
+`duration_seconds` fields using Python `statistics.fmean()`.
+
+```jsonl
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006824, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:01.461Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006771, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:01.557Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006827, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:01.658Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006665, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:01.757Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006631, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:01.858Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006697, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:01.954Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006764, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.054Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006831, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.152Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006928, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.254Z"}
+{"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.007279, "event": "provenance_guard.run", "input": {"data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"}, "output": {"report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:05:02.350Z"}
+```

@@ -1,0 +1,3107 @@
+{
+  "criteria_commit": "084fc6d",
+  "measurement_method": "Three independent clean clones; each clone ran all five criteria. Criterion 5 used ten consecutive invocations per clone.",
+  "runs": [
+    {
+      "run": 1,
+      "checkout_commit": "084fc6dc5e781d43ded6b7012cf04147410f2f78",
+      "python": "Python 3.13.15",
+      "criteria": {
+        "1": {
+          "command": [
+            "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+            ".\\provenance_guard.py"
+          ],
+          "exit_code": 0,
+          "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: provenance_guard_results.json\n",
+          "stderr": "",
+          "report": {
+            "status": "PASS",
+            "csv_rows": 200,
+            "source_records": 200,
+            "missing_mappings": 0,
+            "extra_mappings": 0,
+            "errors": [],
+            "input_sha256": {
+              "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+              "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+            }
+          },
+          "passed": true
+        },
+        "2": {
+          "valid_fixture": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\base.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\base.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\valid-report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\valid.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 2 CSV rows, 2 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\valid-report.json\n",
+            "stderr": "",
+            "report": {
+              "status": "PASS",
+              "csv_rows": 2,
+              "source_records": 2,
+              "missing_mappings": 0,
+              "extra_mappings": 0,
+              "errors": [],
+              "input_sha256": {
+                "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+              }
+            }
+          },
+          "invalid_fixtures": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\missing_source\\missing_source.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\missing_source\\missing_source.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\missing_source\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\missing_source\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 1 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\missing_source\\report.json\n",
+              "stderr": "",
+              "case": "missing_source",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 1,
+                "missing_mappings": 1,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "missing source record"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "27b14738f87f2124e5bfe8a5e0c8b7a7ef9576b5e5c3fa420745cadd148c6acb"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\extra_source\\extra_source.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\extra_source\\extra_source.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\extra_source\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\extra_source\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 3 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\extra_source\\report.json\n",
+              "stderr": "",
+              "case": "extra_source",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 3,
+                "missing_mappings": 0,
+                "extra_mappings": 1,
+                "errors": [
+                  {
+                    "row": 3,
+                    "reason": "extra source record at position 3"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "9966121baf29ff9a2ef3d86e1920c605132fa776a118c550cfafb218b648670a"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_id\\duplicate_id.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_id\\duplicate_id.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_id\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_id\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 2 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_id\\report.json\n",
+              "stderr": "",
+              "case": "duplicate_id",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "duplicate source ID 't3_abc1' (first seen at row 1)"
+                  },
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'def2' does not match source ID 't3_abc1'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "3c22043e5922656d7f147078c77381cd7cb75bf238e76178b3954fd52b8a2997"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_url\\duplicate_url.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_url\\duplicate_url.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_url\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_url\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 2 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\duplicate_url\\report.json\n",
+              "stderr": "",
+              "case": "duplicate_url",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "duplicate source URL (first seen at row 1)"
+                  },
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'abc1' does not match source ID 't3_def2'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "ab631b055654e1603497fe56eced67b66421b3a65bf5c66b0c58a60c3ecc0e13"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\malformed_community_url\\malformed_community_url.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\malformed_community_url\\malformed_community_url.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\malformed_community_url\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\malformed_community_url\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\malformed_community_url\\report.json\n",
+              "stderr": "",
+              "case": "malformed_community_url",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source URL must be an https://www.reddit.com/r/ChatGPT/comments/{id}/ URL"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "d479d9c312917df227b73fb176d0f76d32b6770933a1163f6bd8c4577ac92841"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\url_post_id_mismatch\\url_post_id_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\url_post_id_mismatch\\url_post_id_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\url_post_id_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\url_post_id_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\url_post_id_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "url_post_id_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'wrong' does not match source ID 't3_def2'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\row_position_mismatch\\row_position_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\row_position_mismatch\\row_position_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\row_position_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\row_position_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\row_position_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "row_position_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source record at position 2 records row 9"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "7406d7b1e06cfff0280c80beedf75a7b90f329974a35e64890d61fc9376fe8cc"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\text_length_mismatch\\text_length_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\text_length_mismatch\\text_length_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\text_length_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\text_length_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-2-fixtures\\text_length_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "text_length_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "text_characters is 23; CSV text has 22 UTF-16 code units"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "9935137681a8faccabed4dc2d7d0571c17d5f7f5ddf6439fdbbfa45c55d91715"
+                }
+              },
+              "reported_expected_defect": true
+            }
+          ],
+          "passed": true,
+          "checks_passed": 9,
+          "checks_total": 9
+        },
+        "3": {
+          "cases": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\valid-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 2 CSV rows, 2 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\valid-report.json\n",
+              "stderr": "",
+              "case": "valid",
+              "appended_records": 1,
+              "record": {
+                "details": {
+                  "csv_rows": 2,
+                  "source_records": 2,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.003646,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv",
+                  "sha256": {
+                    "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                    "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\valid-report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:00.983Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad-report.json\n",
+              "stderr": "",
+              "case": "invalid_mapping",
+              "appended_records": 1,
+              "record": {
+                "details": {
+                  "csv_rows": 2,
+                  "source_records": 2,
+                  "validation_errors": 1
+                },
+                "duration_seconds": 0.003499,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.csv",
+                  "sha256": {
+                    "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                    "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad-report.json",
+                  "status": "FAIL"
+                },
+                "status": "fail",
+                "timestamp_utc": "2026-11-17T04:05:01.081Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 2,
+              "stdout": "",
+              "stderr": "Cannot check provenance: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-1\\\\evaluation-run-1\\\\criterion-3-logging\\\\missing.json'\n",
+              "case": "missing_source_file",
+              "appended_records": 1,
+              "record": {
+                "duration_seconds": 0.000284,
+                "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-1\\\\evaluation-run-1\\\\criterion-3-logging\\\\missing.json'",
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv",
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing-report.json",
+                  "status": "not_written"
+                },
+                "status": "error",
+                "timestamp_utc": "2026-11-17T04:05:01.178Z"
+              },
+              "passed": true
+            }
+          ],
+          "passed": true,
+          "records": [
+            {
+              "details": {
+                "csv_rows": 2,
+                "source_records": 2,
+                "validation_errors": 0
+              },
+              "duration_seconds": 0.003646,
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv",
+                "sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+                },
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\valid-report.json",
+                "status": "PASS"
+              },
+              "status": "pass",
+              "timestamp_utc": "2026-11-17T04:05:00.983Z"
+            },
+            {
+              "details": {
+                "csv_rows": 2,
+                "source_records": 2,
+                "validation_errors": 1
+              },
+              "duration_seconds": 0.003499,
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.csv",
+                "sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                },
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\bad-report.json",
+                "status": "FAIL"
+              },
+              "status": "fail",
+              "timestamp_utc": "2026-11-17T04:05:01.081Z"
+            },
+            {
+              "duration_seconds": 0.000284,
+              "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-1\\\\evaluation-run-1\\\\criterion-3-logging\\\\missing.json'",
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\base.csv",
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-3-logging\\missing-report.json",
+                "status": "not_written"
+              },
+              "status": "error",
+              "timestamp_utc": "2026-11-17T04:05:01.178Z"
+            }
+          ]
+        },
+        "4": {
+          "first": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-4-reproducibility\\report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-4-reproducibility\\runs.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-4-reproducibility\\report.json\n",
+            "stderr": ""
+          },
+          "second": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-4-reproducibility\\report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-4-reproducibility\\runs.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-4-reproducibility\\report.json\n",
+            "stderr": ""
+          },
+          "first_report_sha256": "4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c",
+          "second_report_sha256": "4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c",
+          "byte_identical": true,
+          "report": {
+            "status": "PASS",
+            "csv_rows": 200,
+            "source_records": 200,
+            "missing_mappings": 0,
+            "extra_mappings": 0,
+            "errors": [],
+            "input_sha256": {
+              "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+              "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+            }
+          },
+          "passed": true
+        },
+        "5": {
+          "calls": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006824,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:01.461Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006771,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:01.557Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006827,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:01.658Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006665,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:01.757Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006631,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:01.858Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006697,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:01.954Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006764,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:02.054Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006831,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:02.152Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006928,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:02.254Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007279,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-1\\evaluation-run-1\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:02.350Z"
+              },
+              "passed": true
+            }
+          ],
+          "durations_seconds": [
+            0.006824,
+            0.006771,
+            0.006827,
+            0.006665,
+            0.006631,
+            0.006697,
+            0.006764,
+            0.006831,
+            0.006928,
+            0.007279
+          ],
+          "mean_seconds": 0.0068217,
+          "max_seconds": 0.007279,
+          "passed": true
+        }
+      }
+    },
+    {
+      "run": 2,
+      "checkout_commit": "084fc6dc5e781d43ded6b7012cf04147410f2f78",
+      "python": "Python 3.13.15",
+      "criteria": {
+        "1": {
+          "command": [
+            "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+            ".\\provenance_guard.py"
+          ],
+          "exit_code": 0,
+          "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: provenance_guard_results.json\n",
+          "stderr": "",
+          "report": {
+            "status": "PASS",
+            "csv_rows": 200,
+            "source_records": 200,
+            "missing_mappings": 0,
+            "extra_mappings": 0,
+            "errors": [],
+            "input_sha256": {
+              "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+              "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+            }
+          },
+          "passed": true
+        },
+        "2": {
+          "valid_fixture": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\base.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\base.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\valid-report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\valid.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 2 CSV rows, 2 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\valid-report.json\n",
+            "stderr": "",
+            "report": {
+              "status": "PASS",
+              "csv_rows": 2,
+              "source_records": 2,
+              "missing_mappings": 0,
+              "extra_mappings": 0,
+              "errors": [],
+              "input_sha256": {
+                "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+              }
+            }
+          },
+          "invalid_fixtures": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\missing_source\\missing_source.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\missing_source\\missing_source.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\missing_source\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\missing_source\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 1 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\missing_source\\report.json\n",
+              "stderr": "",
+              "case": "missing_source",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 1,
+                "missing_mappings": 1,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "missing source record"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "27b14738f87f2124e5bfe8a5e0c8b7a7ef9576b5e5c3fa420745cadd148c6acb"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\extra_source\\extra_source.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\extra_source\\extra_source.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\extra_source\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\extra_source\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 3 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\extra_source\\report.json\n",
+              "stderr": "",
+              "case": "extra_source",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 3,
+                "missing_mappings": 0,
+                "extra_mappings": 1,
+                "errors": [
+                  {
+                    "row": 3,
+                    "reason": "extra source record at position 3"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "9966121baf29ff9a2ef3d86e1920c605132fa776a118c550cfafb218b648670a"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_id\\duplicate_id.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_id\\duplicate_id.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_id\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_id\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 2 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_id\\report.json\n",
+              "stderr": "",
+              "case": "duplicate_id",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "duplicate source ID 't3_abc1' (first seen at row 1)"
+                  },
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'def2' does not match source ID 't3_abc1'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "3c22043e5922656d7f147078c77381cd7cb75bf238e76178b3954fd52b8a2997"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_url\\duplicate_url.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_url\\duplicate_url.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_url\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_url\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 2 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\duplicate_url\\report.json\n",
+              "stderr": "",
+              "case": "duplicate_url",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "duplicate source URL (first seen at row 1)"
+                  },
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'abc1' does not match source ID 't3_def2'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "ab631b055654e1603497fe56eced67b66421b3a65bf5c66b0c58a60c3ecc0e13"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\malformed_community_url\\malformed_community_url.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\malformed_community_url\\malformed_community_url.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\malformed_community_url\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\malformed_community_url\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\malformed_community_url\\report.json\n",
+              "stderr": "",
+              "case": "malformed_community_url",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source URL must be an https://www.reddit.com/r/ChatGPT/comments/{id}/ URL"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "d479d9c312917df227b73fb176d0f76d32b6770933a1163f6bd8c4577ac92841"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\url_post_id_mismatch\\url_post_id_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\url_post_id_mismatch\\url_post_id_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\url_post_id_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\url_post_id_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\url_post_id_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "url_post_id_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'wrong' does not match source ID 't3_def2'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\row_position_mismatch\\row_position_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\row_position_mismatch\\row_position_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\row_position_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\row_position_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\row_position_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "row_position_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source record at position 2 records row 9"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "7406d7b1e06cfff0280c80beedf75a7b90f329974a35e64890d61fc9376fe8cc"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\text_length_mismatch\\text_length_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\text_length_mismatch\\text_length_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\text_length_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\text_length_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-2-fixtures\\text_length_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "text_length_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "text_characters is 23; CSV text has 22 UTF-16 code units"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "9935137681a8faccabed4dc2d7d0571c17d5f7f5ddf6439fdbbfa45c55d91715"
+                }
+              },
+              "reported_expected_defect": true
+            }
+          ],
+          "passed": true,
+          "checks_passed": 9,
+          "checks_total": 9
+        },
+        "3": {
+          "cases": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\valid-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 2 CSV rows, 2 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\valid-report.json\n",
+              "stderr": "",
+              "case": "valid",
+              "appended_records": 1,
+              "record": {
+                "details": {
+                  "csv_rows": 2,
+                  "source_records": 2,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.003367,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.csv",
+                  "sha256": {
+                    "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                    "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\valid-report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:08.666Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad-report.json\n",
+              "stderr": "",
+              "case": "invalid_mapping",
+              "appended_records": 1,
+              "record": {
+                "details": {
+                  "csv_rows": 2,
+                  "source_records": 2,
+                  "validation_errors": 1
+                },
+                "duration_seconds": 0.003876,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad.csv",
+                  "sha256": {
+                    "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                    "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad-report.json",
+                  "status": "FAIL"
+                },
+                "status": "fail",
+                "timestamp_utc": "2026-11-17T04:05:08.770Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\missing.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\missing-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 2,
+              "stdout": "",
+              "stderr": "Cannot check provenance: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-2\\\\evaluation-run-2\\\\criterion-3-logging\\\\missing.json'\n",
+              "case": "missing_source_file",
+              "appended_records": 1,
+              "record": {
+                "duration_seconds": 0.00027,
+                "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-2\\\\evaluation-run-2\\\\criterion-3-logging\\\\missing.json'",
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.csv",
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\missing.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\missing-report.json",
+                  "status": "not_written"
+                },
+                "status": "error",
+                "timestamp_utc": "2026-11-17T04:05:08.871Z"
+              },
+              "passed": true
+            }
+          ],
+          "passed": true,
+          "records": [
+            {
+              "details": {
+                "csv_rows": 2,
+                "source_records": 2,
+                "validation_errors": 0
+              },
+              "duration_seconds": 0.003367,
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.csv",
+                "sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+                },
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\valid-report.json",
+                "status": "PASS"
+              },
+              "status": "pass",
+              "timestamp_utc": "2026-11-17T04:05:08.666Z"
+            },
+            {
+              "details": {
+                "csv_rows": 2,
+                "source_records": 2,
+                "validation_errors": 1
+              },
+              "duration_seconds": 0.003876,
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad.csv",
+                "sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                },
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\bad-report.json",
+                "status": "FAIL"
+              },
+              "status": "fail",
+              "timestamp_utc": "2026-11-17T04:05:08.770Z"
+            },
+            {
+              "duration_seconds": 0.00027,
+              "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-2\\\\evaluation-run-2\\\\criterion-3-logging\\\\missing.json'",
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\base.csv",
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\missing.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-3-logging\\missing-report.json",
+                "status": "not_written"
+              },
+              "status": "error",
+              "timestamp_utc": "2026-11-17T04:05:08.871Z"
+            }
+          ]
+        },
+        "4": {
+          "first": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-4-reproducibility\\report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-4-reproducibility\\runs.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-4-reproducibility\\report.json\n",
+            "stderr": ""
+          },
+          "second": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-4-reproducibility\\report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-4-reproducibility\\runs.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-4-reproducibility\\report.json\n",
+            "stderr": ""
+          },
+          "first_report_sha256": "4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c",
+          "second_report_sha256": "4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c",
+          "byte_identical": true,
+          "report": {
+            "status": "PASS",
+            "csv_rows": 200,
+            "source_records": 200,
+            "missing_mappings": 0,
+            "extra_mappings": 0,
+            "errors": [],
+            "input_sha256": {
+              "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+              "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+            }
+          },
+          "passed": true
+        },
+        "5": {
+          "calls": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.00721,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.149Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006775,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.252Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.00705,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.352Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007003,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.451Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007298,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.551Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.00733,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.659Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.00717,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.764Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007363,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.874Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007045,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:09.978Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.00679,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-2\\evaluation-run-2\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:10.080Z"
+              },
+              "passed": true
+            }
+          ],
+          "durations_seconds": [
+            0.00721,
+            0.006775,
+            0.00705,
+            0.007003,
+            0.007298,
+            0.00733,
+            0.00717,
+            0.007363,
+            0.007045,
+            0.00679
+          ],
+          "mean_seconds": 0.0071034,
+          "max_seconds": 0.007363,
+          "passed": true
+        }
+      }
+    },
+    {
+      "run": 3,
+      "checkout_commit": "084fc6dc5e781d43ded6b7012cf04147410f2f78",
+      "python": "Python 3.13.15",
+      "criteria": {
+        "1": {
+          "command": [
+            "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+            ".\\provenance_guard.py"
+          ],
+          "exit_code": 0,
+          "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: provenance_guard_results.json\n",
+          "stderr": "",
+          "report": {
+            "status": "PASS",
+            "csv_rows": 200,
+            "source_records": 200,
+            "missing_mappings": 0,
+            "extra_mappings": 0,
+            "errors": [],
+            "input_sha256": {
+              "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+              "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+            }
+          },
+          "passed": true
+        },
+        "2": {
+          "valid_fixture": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\base.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\base.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\valid-report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\valid.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 2 CSV rows, 2 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\valid-report.json\n",
+            "stderr": "",
+            "report": {
+              "status": "PASS",
+              "csv_rows": 2,
+              "source_records": 2,
+              "missing_mappings": 0,
+              "extra_mappings": 0,
+              "errors": [],
+              "input_sha256": {
+                "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+              }
+            }
+          },
+          "invalid_fixtures": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\missing_source\\missing_source.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\missing_source\\missing_source.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\missing_source\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\missing_source\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 1 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\missing_source\\report.json\n",
+              "stderr": "",
+              "case": "missing_source",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 1,
+                "missing_mappings": 1,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "missing source record"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "27b14738f87f2124e5bfe8a5e0c8b7a7ef9576b5e5c3fa420745cadd148c6acb"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\extra_source\\extra_source.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\extra_source\\extra_source.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\extra_source\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\extra_source\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 3 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\extra_source\\report.json\n",
+              "stderr": "",
+              "case": "extra_source",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 3,
+                "missing_mappings": 0,
+                "extra_mappings": 1,
+                "errors": [
+                  {
+                    "row": 3,
+                    "reason": "extra source record at position 3"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "9966121baf29ff9a2ef3d86e1920c605132fa776a118c550cfafb218b648670a"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_id\\duplicate_id.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_id\\duplicate_id.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_id\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_id\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 2 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_id\\report.json\n",
+              "stderr": "",
+              "case": "duplicate_id",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "duplicate source ID 't3_abc1' (first seen at row 1)"
+                  },
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'def2' does not match source ID 't3_abc1'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "3c22043e5922656d7f147078c77381cd7cb75bf238e76178b3954fd52b8a2997"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_url\\duplicate_url.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_url\\duplicate_url.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_url\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_url\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 2 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\duplicate_url\\report.json\n",
+              "stderr": "",
+              "case": "duplicate_url",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "duplicate source URL (first seen at row 1)"
+                  },
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'abc1' does not match source ID 't3_def2'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "ab631b055654e1603497fe56eced67b66421b3a65bf5c66b0c58a60c3ecc0e13"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\malformed_community_url\\malformed_community_url.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\malformed_community_url\\malformed_community_url.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\malformed_community_url\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\malformed_community_url\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\malformed_community_url\\report.json\n",
+              "stderr": "",
+              "case": "malformed_community_url",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source URL must be an https://www.reddit.com/r/ChatGPT/comments/{id}/ URL"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "d479d9c312917df227b73fb176d0f76d32b6770933a1163f6bd8c4577ac92841"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\url_post_id_mismatch\\url_post_id_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\url_post_id_mismatch\\url_post_id_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\url_post_id_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\url_post_id_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\url_post_id_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "url_post_id_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source URL post ID 'wrong' does not match source ID 't3_def2'"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\row_position_mismatch\\row_position_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\row_position_mismatch\\row_position_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\row_position_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\row_position_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\row_position_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "row_position_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "source record at position 2 records row 9"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "7406d7b1e06cfff0280c80beedf75a7b90f329974a35e64890d61fc9376fe8cc"
+                }
+              },
+              "reported_expected_defect": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\text_length_mismatch\\text_length_mismatch.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\text_length_mismatch\\text_length_mismatch.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\text_length_mismatch\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\text_length_mismatch\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-2-fixtures\\text_length_mismatch\\report.json\n",
+              "stderr": "",
+              "case": "text_length_mismatch",
+              "report": {
+                "status": "FAIL",
+                "csv_rows": 2,
+                "source_records": 2,
+                "missing_mappings": 0,
+                "extra_mappings": 0,
+                "errors": [
+                  {
+                    "row": 2,
+                    "reason": "text_characters is 23; CSV text has 22 UTF-16 code units"
+                  }
+                ],
+                "input_sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "9935137681a8faccabed4dc2d7d0571c17d5f7f5ddf6439fdbbfa45c55d91715"
+                }
+              },
+              "reported_expected_defect": true
+            }
+          ],
+          "passed": true,
+          "checks_passed": 9,
+          "checks_total": 9
+        },
+        "3": {
+          "cases": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\valid-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 2 CSV rows, 2 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\valid-report.json\n",
+              "stderr": "",
+              "case": "valid",
+              "appended_records": 1,
+              "record": {
+                "details": {
+                  "csv_rows": 2,
+                  "source_records": 2,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.00548,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.csv",
+                  "sha256": {
+                    "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                    "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\valid-report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:16.607Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 1,
+              "stdout": "FAIL: 2 CSV rows, 2 source records, 1 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad-report.json\n",
+              "stderr": "",
+              "case": "invalid_mapping",
+              "appended_records": 1,
+              "record": {
+                "details": {
+                  "csv_rows": 2,
+                  "source_records": 2,
+                  "validation_errors": 1
+                },
+                "duration_seconds": 0.004361,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad.csv",
+                  "sha256": {
+                    "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                    "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad-report.json",
+                  "status": "FAIL"
+                },
+                "status": "fail",
+                "timestamp_utc": "2026-11-17T04:05:16.712Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\missing.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\missing-report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\runs.jsonl"
+              ],
+              "exit_code": 2,
+              "stdout": "",
+              "stderr": "Cannot check provenance: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-3\\\\evaluation-run-3\\\\criterion-3-logging\\\\missing.json'\n",
+              "case": "missing_source_file",
+              "appended_records": 1,
+              "record": {
+                "duration_seconds": 0.000302,
+                "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-3\\\\evaluation-run-3\\\\criterion-3-logging\\\\missing.json'",
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.csv",
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\missing.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\missing-report.json",
+                  "status": "not_written"
+                },
+                "status": "error",
+                "timestamp_utc": "2026-11-17T04:05:16.818Z"
+              },
+              "passed": true
+            }
+          ],
+          "passed": true,
+          "records": [
+            {
+              "details": {
+                "csv_rows": 2,
+                "source_records": 2,
+                "validation_errors": 0
+              },
+              "duration_seconds": 0.00548,
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.csv",
+                "sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "cd4fd9afe4b555688ada97ffa148c48f51215130b468f63ab5b0cbe667ed0089"
+                },
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\valid-report.json",
+                "status": "PASS"
+              },
+              "status": "pass",
+              "timestamp_utc": "2026-11-17T04:05:16.607Z"
+            },
+            {
+              "details": {
+                "csv_rows": 2,
+                "source_records": 2,
+                "validation_errors": 1
+              },
+              "duration_seconds": 0.004361,
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad.csv",
+                "sha256": {
+                  "data": "5ca5a473bf62d0660651f8370a79d1a109d5e896e0e50ba18698a49bd128a67b",
+                  "sources": "0e85d5d7dada952b89dec9cb0ab5fe6efaa83145475f8f347e681fef28dfd447"
+                },
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\bad-report.json",
+                "status": "FAIL"
+              },
+              "status": "fail",
+              "timestamp_utc": "2026-11-17T04:05:16.712Z"
+            },
+            {
+              "duration_seconds": 0.000302,
+              "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\trung\\\\AppData\\\\Local\\\\Temp\\\\takemeter-capstone-eval-x6r253bc\\\\run-3\\\\evaluation-run-3\\\\criterion-3-logging\\\\missing.json'",
+              "event": "provenance_guard.run",
+              "input": {
+                "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\base.csv",
+                "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\missing.json"
+              },
+              "output": {
+                "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-3-logging\\missing-report.json",
+                "status": "not_written"
+              },
+              "status": "error",
+              "timestamp_utc": "2026-11-17T04:05:16.818Z"
+            }
+          ]
+        },
+        "4": {
+          "first": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-4-reproducibility\\report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-4-reproducibility\\runs.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-4-reproducibility\\report.json\n",
+            "stderr": ""
+          },
+          "second": {
+            "command": [
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+              "--data",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+              "--sources",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+              "--out",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-4-reproducibility\\report.json",
+              "--log",
+              "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-4-reproducibility\\runs.jsonl"
+            ],
+            "exit_code": 0,
+            "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-4-reproducibility\\report.json\n",
+            "stderr": ""
+          },
+          "first_report_sha256": "4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c",
+          "second_report_sha256": "4fcc4c5855dbddf7507238eca1944cc90f7fcf9fef9e1b86b9669e236478e52c",
+          "byte_identical": true,
+          "report": {
+            "status": "PASS",
+            "csv_rows": 200,
+            "source_records": 200,
+            "missing_mappings": 0,
+            "extra_mappings": 0,
+            "errors": [],
+            "input_sha256": {
+              "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+              "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+            }
+          },
+          "passed": true
+        },
+        "5": {
+          "calls": [
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007997,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.103Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007895,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.204Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007341,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.313Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007151,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.418Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.006731,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.520Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007066,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.619Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007353,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.741Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.007164,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.845Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.008406,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:17.956Z"
+              },
+              "passed": true
+            },
+            {
+              "command": [
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\.venv\\Scripts\\python.exe",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\provenance_guard.py",
+                "--data",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                "--sources",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json",
+                "--out",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                "--log",
+                "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\runs.jsonl"
+              ],
+              "exit_code": 0,
+              "stdout": "PASS: 200 CSV rows, 200 source records, 0 errors\nReport: C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json\n",
+              "stderr": "",
+              "record": {
+                "details": {
+                  "csv_rows": 200,
+                  "source_records": 200,
+                  "validation_errors": 0
+                },
+                "duration_seconds": 0.008191,
+                "event": "provenance_guard.run",
+                "input": {
+                  "data": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\labels.csv",
+                  "sha256": {
+                    "data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205",
+                    "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"
+                  },
+                  "sources": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\data\\labels_sources.json"
+                },
+                "output": {
+                  "report": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc\\run-3\\evaluation-run-3\\criterion-5-latency\\report.json",
+                  "status": "PASS"
+                },
+                "status": "pass",
+                "timestamp_utc": "2026-11-17T04:05:18.066Z"
+              },
+              "passed": true
+            }
+          ],
+          "durations_seconds": [
+            0.007997,
+            0.007895,
+            0.007341,
+            0.007151,
+            0.006731,
+            0.007066,
+            0.007353,
+            0.007164,
+            0.008406,
+            0.008191
+          ],
+          "mean_seconds": 0.0075295,
+          "max_seconds": 0.008406,
+          "passed": true
+        }
+      }
+    }
+  ],
+  "summary": {
+    "1": "MET",
+    "2": "MET",
+    "3": "MET",
+    "4": "MET",
+    "5": "MET"
+  },
+  "temporary_checkout_root": "C:\\Users\\trung\\AppData\\Local\\Temp\\takemeter-capstone-eval-x6r253bc"
+}
