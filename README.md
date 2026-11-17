@@ -623,7 +623,7 @@ Use `--data`, `--sources`, or `--out` to select other input or report paths.
 
 **How I Used AI**
 
-Copilot assisted with implementing the guard and its focused tests. I checked the implementation against the existing source manifest and project data, including resolving a text-length mismatch caused by Unicode counting conventions. The tool uses only the Python standard library and does not fetch Reddit pages.
+Copilot helped implement and test the provenance guard, refine the UTF-16 line-length calculation, review the measurable criteria, and compare the before/after runs. I checked the CRLF length formula, the focused regression tests, all trial verdicts, report hashes, and timing records against the saved evidence files; the self-check page required sign-in, so I applied the checklist text supplied in the conversation. Copilot helped draft this write-up, while I chose the scope, tightened the latency target, and decided how to interpret the measured improvement.
 
 **Milestone 1 Build Smoke Check**
 
@@ -634,6 +634,19 @@ The original four build criteria in [criteria.md](criteria.md) passed their chec
 **What's Still Broken**
 
 The guard validates only the relationship between the local CSV and its saved manifest. A fabricated but internally consistent manifest can still pass; the tool does not verify that a post exists, that its current public page matches the saved text, or that its recorded source is true.
+
+No Capstone criterion is currently MISSED: all five passed in both the baseline
+and follow-up trials. The initial criterion 5 limit was too loose at 0.100
+seconds; I tightened it to 0.020 seconds before the follow-up, and all three
+new ten-run means stayed below that target. I stopped at local consistency
+because authenticating sources needs a trusted source of truth outside this
+extension's scope.
+
+With another unit, I would first verify the manifest against a trusted
+signature whose public key is distributed separately, because internal
+consistency alone cannot expose a fabricated manifest. I would keep that
+evidence versioned and local instead of fetching Reddit at run time, so checks
+remain reproducible and offline.
 
 **Instrumentation**
 
@@ -689,6 +702,16 @@ were **0.006822 s**,
 successful calls was **0.007152 s**. Each sample is below the original
 0.100-second criterion. The per-round records are in
 [capstone_evaluation_runs.json](capstone_evaluation_runs.json).
+
+After the improvement, the mean recorded duration was **0.0068678 seconds
+per run**, calculated with `statistics.fmean()` over the 30 successful
+`duration_seconds` records from three clean clones with ten runs each. The
+guard's `time.perf_counter()` measurement starts after argument parsing and
+covers input reading and hashing, validation, and report writing; it excludes
+Python startup and JSONL append time. For 100 people each running it once a
+day, the measured work is **0.0068678 seconds/run × 100 runs/day = 0.68678
+seconds/day** (about 0.687 seconds total). This is elapsed guard time, not
+API or token spend, and excludes process-startup overhead.
 
 **Run Log and Verdicts**
 
@@ -937,3 +960,7 @@ the per-trial mean is `statistics.fmean()` over their `duration_seconds`.
 {"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006863, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:39.065Z"}
 {"details": {"csv_rows": 200, "source_records": 200, "validation_errors": 0}, "duration_seconds": 0.006704, "event": "provenance_guard.run", "input": {"data": "labels.csv", "sha256": {"data": "948e448cd2e52a4c3e63529a34dbb2b4cf79090729b7201dbde38d2124198205", "sources": "2420d99c22d479a29aef1e606d1c09b9a48f6e8e7294ee345c06408d0058d909"}, "sources": "data/labels_sources.json"}, "output": {"report": ".followup-run-1\\criterion-5-latency\\report.json", "status": "PASS"}, "status": "pass", "timestamp_utc": "2026-11-17T04:23:39.160Z"}
 ```
+**Submission URL**
+
+Updated in place; no new copy was created:
+[https://github.com/samuelhateseconomic/ai201-project3-takemeter-starter-v2026](https://github.com/samuelhateseconomic/ai201-project3-takemeter-starter-v2026).
