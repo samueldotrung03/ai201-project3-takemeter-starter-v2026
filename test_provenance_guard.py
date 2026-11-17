@@ -40,6 +40,14 @@ class ProvenanceGuardTests(unittest.TestCase):
             provenance_guard.text_character_count("first\r\nsecond 🌱"),
         )
 
+    def test_text_length_handles_mixed_and_repeated_line_endings(self):
+        text = "first\rsecond\r\nthird 🌱\r\r\nfinal"
+        normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+        self.assertEqual(
+            provenance_guard.text_character_count(text),
+            len(normalized.encode("utf-16-le")) // 2,
+        )
+
     def test_valid_mapping_handles_multiline_text_and_hashes_inputs(self):
         rows = fixture_rows()
         sources = fixture_sources(rows)

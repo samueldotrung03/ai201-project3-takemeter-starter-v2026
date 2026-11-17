@@ -41,8 +41,9 @@ def read_inputs(data_path, sources_path):
 
 def text_character_count(text):
     """Match the manifest's UTF-16 count independent of CSV line endings."""
-    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
-    return len(normalized.encode("utf-16-le")) // 2
+    utf16_units = len(text.encode("utf-16-le")) // 2
+    # Each CRLF pair becomes one LF, removing exactly one UTF-16 code unit.
+    return utf16_units - text.count("\r\n")
 
 
 def validate(rows, sources):
