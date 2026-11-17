@@ -225,6 +225,127 @@ stable report fields. Timestamps, if included, are not part of this comparison.
 
 ---
 
+## Capstone evaluation: local provenance guard and run instrumentation
+
+These five criteria are for evaluating the guard and its Path B run path. They
+were written before running the evaluations below. Earlier build smoke tests
+and run-time measurements are historical implementation evidence from the
+previous milestone, not verdicts against this set.
+
+### 1. The documented clean-checkout command validates the frozen dataset
+
+From a clean checkout using the Python 3.13 setup in `RUNNING.md`, the
+documented start command must exit with status 0 and write a JSON report with
+`status` = `PASS`, exactly 200 CSV rows and 200 source records, zero missing
+mappings, zero extra mappings, and an empty `errors` list.
+
+**Why this target:** The frozen project dataset has 200 labeled rows and 200
+source records. A complete one-to-one mapping has no legitimate partial-credit
+case: even one missing or incorrect mapping makes a claim about a specific
+post untraceable.
+
+**How to check:** Clone the committed repository into a new directory, follow
+the clean-checkout commands in `RUNNING.md`, run the documented guard command,
+and inspect its exit code and `provenance_guard_results.json`.
+
+### 2. The guard distinguishes eight independent mapping defects
+
+Start with a two-row UTF-8 CSV and a manifest containing two corresponding
+records with matching positions and text lengths, unique `t3_` IDs, and
+matching `https://www.reddit.com/r/ChatGPT/comments/{id}/...` URLs. The base
+fixture must pass. Make eight separate copies, introducing one controlled
+mutation in each: remove a source record, add an extra record, duplicate a
+post ID, duplicate a URL, use a malformed community URL, mismatch a URL's post
+ID, mismatch a row position, or mismatch a text length. All eight invalid
+fixtures must exit with status 1 and report the affected row and corresponding
+defect.
+
+**Why this target:** These are the eight mapping invariants the guard claims
+to enforce. One tolerated defect could silently attach the wrong source to a
+training example; requiring all eight cases to fail leaves no error class
+unmeasured, while testing unrelated live-page behavior would exceed the
+guard's stated scope.
+
+**How to check:** Run the base fixture and each mutated fixture as one
+`--data`/`--sources` pair. Compare each process exit status and row-specific
+JSON diagnostic with the field deliberately changed in that fixture.
+
+### 3. Successful and failed executions each leave one structured record
+
+For three executions—a valid input, an invalid mapping, and a missing source
+file—the run log must gain exactly one parseable JSONL record per execution.
+Each record must contain a UTC `timestamp_utc`, `input`, `output`,
+nonnegative `duration_seconds`, and `status`; the expected statuses and exit
+codes are respectively `pass` / 0, `fail` / 1, and `error` / 2.
+
+**Why this target:** A missing input or rejected mapping must not disappear as
+an unexplained absence in an append-only local log. Distinct statuses and
+process exit codes let a later reader separate bad data from an unreadable
+run without inspecting console history.
+
+**How to check:** Save the log line count before each command, run it once,
+then require one added line that parses as JSON and has the fields and
+status/exit-code pair specified above.
+
+### 4. Identical inputs produce a byte-identical report
+
+Two consecutive guard runs on unchanged input files must write byte-for-byte
+identical report files, with the same verdict, counts, empty error list, and
+SHA-256 hashes for both inputs.
+
+**Why this target:** The report is the portable result of a preflight check.
+Including exact input hashes makes the finding traceable; identical inputs
+should not produce a different report merely because the command was repeated.
+The run timestamp belongs in JSONL, not in the stable report.
+
+**How to check:** Preserve the first report bytes, run the same command again
+without changing either input, and compare the report files byte-for-byte.
+
+### 5. Ten successful preflight runs average no more than 0.100 seconds
+
+On the frozen 200-row dataset and the same Windows/Python 3.13 machine, the
+arithmetic mean of `duration_seconds` across ten consecutive successful
+invocations of the documented command must be at most **0.100 seconds**.
+Use only records with `status` = `pass`; do not include failures or round
+individual durations before averaging.
+
+**Why this target:** The guard is a preflight before using this small local
+dataset, so it should not add a one-second wait to that workflow. One hundred
+milliseconds bounds its local work to a small fraction of that wait; a
+10-millisecond target would be dominated by ordinary file-open/cache variation
+for this input. Fixing the machine, interpreter, input, and timer field makes
+the comparison repeatable rather than promising the same speed on every
+computer.
+
+**How to check:** Run the documented command ten times on the specified setup,
+read the ten `duration_seconds` fields from the new JSONL records, and
+calculate their unrounded arithmetic mean.
+
+### Self-check against the course checklist
+
+The official page redirected to sign-in; the checklist text was supplied in
+this session and applied here. This is an AI-assisted check, not an independent
+course-staff review.
+
+- **Criterion 1:** Names the exact command outcome and numeric counts; another
+  reader can inspect the exit code and report without interpreting a judgment
+  word.
+- **Criterion 2:** Names one valid case and eight isolated invalid cases;
+  pass/fail and affected-row output are directly observable.
+- **Criterion 3:** Names the exact record fields, record-count change, statuses,
+  and exit codes for three runs, including two distinct failure paths.
+- **Criterion 4:** Uses a byte comparison and fixed inputs, so two reviewers
+  apply the same test and get the same answer.
+- **Criterion 5:** Defines the dataset, machine/interpreter, ten-run sample,
+  log field, averaging method, and 0.100-second limit.
+- **Set check:** The criteria cover clean startup, mapping correctness,
+  failure logging, repeatability, and run time. Criteria 2 and 3 test bad
+  paths; a missed mapping or an unrecorded failure would be a meaningful
+  result, not a cosmetic miss. All five target the extension rather than only
+  the pre-existing classifier.
+
+---
+
 ## AI checkability review before training
 
 Review question: **Could someone check each criterion without asking its
