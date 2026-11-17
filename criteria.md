@@ -321,6 +321,19 @@ computer.
 read the ten `duration_seconds` fields from the new JSONL records, and
 calculate their unrounded arithmetic mean.
 
+**Follow-up target, set before the post-improvement evaluation:** Keep the
+original criterion above as the baseline. For the follow-up, the arithmetic
+mean across ten successful invocations must be at most **0.020 seconds** in
+each of three trials.
+
+**Why tighten it:** The original 0.100-second limit was met, but the three
+measured means were 0.006822, 0.007103, and 0.007530 seconds. The original
+ceiling allowed roughly fourteen times the overall observed mean. A 0.020-second
+ceiling is five times stricter while retaining about 2.7 times the slowest
+observed trial mean as headroom for local file and cache variation. This is a
+tighter test of the same measurable behavior, not a change made to excuse a
+miss.
+
 ### Self-check against the course checklist
 
 The official page redirected to sign-in; the checklist text was supplied in
@@ -337,7 +350,8 @@ course-staff review.
 - **Criterion 4:** Uses a byte comparison and fixed inputs, so two reviewers
   apply the same test and get the same answer.
 - **Criterion 5:** Defines the dataset, machine/interpreter, ten-run sample,
-  log field, averaging method, and 0.100-second limit.
+  log field, averaging method, original 0.100-second limit, and the stricter
+  0.020-second follow-up limit.
 - **Set check:** The criteria cover clean startup, mapping correctness,
   failure logging, repeatability, and run time. Criteria 2 and 3 test bad
   paths; a missed mapping or an unrecorded failure would be a meaningful
