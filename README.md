@@ -963,4 +963,4 @@ the per-trial mean is `statistics.fmean()` over their `duration_seconds`.
 **Submission URL**
 
 Updated in place; no new copy was created:
-[https://github.com/samuelhateseconomic/ai201-project3-takemeter-starter-v2026](https://github.com/samuelhateseconomic/ai201-project3-takemeter-starter-v2026).
+[https://github.com/samueldotrung03/ai201-project3-takemeter-starter-v2026](https://github.com/samueldotrung03/ai201-project3-takemeter-starter-v2026).
